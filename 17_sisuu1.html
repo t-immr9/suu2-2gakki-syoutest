@@ -69,22 +69,24 @@ $('#keys').onclick=e=>{let k=e.target.dataset.k;if(!k)return;if(k==='分数')ret
 function ser(){return tok.map(t=>t.t==='f'?`${t.n}/(${t.d})`:t.v).join('').replace(/×/g,'*').replace(/÷/g,'/')}function C(s){return String(s).replace(/\s/g,'').replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-').replace(/\/\(([^()]+)\)/g,'/$1').replace(/^\((.*)\)$/,'$1')}function disp(s){let m=String(s).match(/^([^/]+)\/\((.+)\)$/)||String(s).match(/^([^/]+)\/(.+)$/);return m?`<span class="frac"><span class="num">${M(m[1])}</span><span class="den">${M(m[2])}</span></span>`:M(s)}
 function monoSignature(s){
   s=C(s).replace(/[()]/g,'');
+  if(s.includes('*'))return null; // ×が残る式（問題の式の書き写し）は不可
   let parts=s.split('/');
   if(parts.length>2)return null;
   function parsePart(x){
     if(!x)return null;
-    let coef=1, ex={a:0,b:0};
+    let coef=1, ex={a:0,b:0}, seen={};
     x=x.replace(/\*/g,'');
     let cm=x.match(/^(-?\d+)/);
     if(cm){coef=Number(cm[1]);x=x.slice(cm[1].length)}
     if(x==='')return {coef,ex};
     let re=/([ab])(?:\^(-?\d+))?/g, pos=0, m;
-    while((m=re.exec(x))){if(m.index!==pos)return null;ex[m[1]]+=m[2]===undefined?1:Number(m[2]);pos=re.lastIndex}
+    while((m=re.exec(x))){if(m.index!==pos)return null;if(seen[m[1]])return null;seen[m[1]]=1;ex[m[1]]+=m[2]===undefined?1:Number(m[2]);pos=re.lastIndex}
     if(pos!==x.length)return null;
     return {coef,ex};
   }
   let n=parsePart(parts[0]),d=parts[1]===undefined?{coef:1,ex:{a:0,b:0}}:parsePart(parts[1]);
   if(!n||!d||d.coef===0)return null;
+  if(parts[1]!==undefined&&['a','b'].some(v=>n.ex[v]!==0&&d.ex[v]!==0))return null; // 分子と分母の両方に同じ文字（÷の書き写し）は不可
   let g=(a,b)=>b?g(b,a%b):Math.abs(a),gg=g(n.coef,d.coef),num=n.coef/gg,den=d.coef/gg;
   if(den<0){num=-num;den=-den}
   return `${num}/${den}|a${n.ex.a-d.ex.a}|b${n.ex.b-d.ex.b}`;
