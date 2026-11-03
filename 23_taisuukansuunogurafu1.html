@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>数学II 507 対数関数とそのグラフ（1）</title>
+<link rel="stylesheet" href="katex/katex.min.css"><script src="katex/katex.min.js"></script>
+<style>
+:root{--n:#12316b;--b:#0764e8;--bg:#f3f6fb;--line:#d4dce8;--ok:#087443;--ng:#a32920}*{box-sizing:border-box}button,.btn,.key{touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none}body{margin:0;background:var(--bg);color:#152039;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Yu Gothic",Meiryo,sans-serif;line-height:1.65}header{background:var(--n);color:#fff;padding:18px;border-bottom:6px solid #91c5ff}header div,main{max-width:1180px;margin:auto}h1{margin:0;font-size:clamp(1.3rem,3vw,2rem)}header p{margin:4px 0;color:#dceaff}.box{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px;box-shadow:0 2px 8px #1020400d}.hide{display:none!important}h2{border-left:7px solid var(--b);padding-left:10px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}label{font-weight:800}input,select{width:100%;padding:11px;border:1px solid #b8c5d8;border-radius:9px;font-size:1rem}.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.btn{border:0;border-radius:10px;padding:11px 17px;font-weight:800;font-size:1rem}.pri{background:var(--b);color:#fff}.sec{background:#e8edf4}.bar{height:10px;background:#e1e6ee;border-radius:9px;overflow:hidden}.bar div{height:100%;background:var(--b)}.top{display:flex;justify-content:space-between;font-weight:800}.math{font-family:"Times New Roman","Yu Mincho","Hiragino Mincho ProN",serif;font-size:1.35rem;font-style:italic;letter-spacing:.015em;overflow-wrap:anywhere}.katex{font-size:1.1em}.answer{background:#ecfbf3;border-left:6px solid var(--ok);padding:14px;border-radius:10px}.yellow{background:#fff7cc;border:1px solid #ecd467;padding:12px;border-radius:10px}.work{display:grid;grid-template-columns:1fr;gap:16px}.field{min-height:70px;border:2px solid #89aee8;border-radius:12px;padding:13px;background:#fff;font-size:1.45rem;display:flex;align-items:center;gap:10px;overflow-x:auto}.pad{display:grid;grid-template-columns:repeat(3,minmax(72px,1fr));gap:9px}.key{border:1px solid #b8c5d8;background:#f7f9fc;border-radius:10px;padding:13px 8px;font-size:1.05rem;font-weight:800}.feed{margin-top:14px;padding:15px;border-radius:12px}.ok{background:#eaf8f0;border-left:6px solid var(--ok)}.ng{background:#fff0ef;border-left:6px solid var(--ng)}.memoTools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}.memoTools button{border:1px solid #bbc8d9;background:#fff;border-radius:8px;padding:8px 11px;font-weight:700}canvas{display:block;width:100%;height:230px;background:#fff;border:2px solid #aab8cb;border-radius:12px;touch-action:none}.explanation{margin-top:12px;padding:12px 2px 2px;border-top:1px solid #c9dfd2;background:transparent}.resultGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.resultGrid>div{background:#f6f8fc;padding:12px;border-radius:10px}.score{font-size:2.4rem;font-weight:900;color:var(--n);text-align:center}.small{font-size:.92rem;color:#4a5970}.quizLead{font-weight:800;color:#334766}.readonly{background:#f1f4f8}.point{display:inline-block;color:#152039;font-size:.9rem;font-weight:800}.qmath{font-size:clamp(1.35rem,4.4vw,2rem);margin:18px 0}.historyItem{border-top:1px solid var(--line);padding:12px 0}
+@media(orientation:landscape) and (min-width:760px){.work{grid-template-columns:minmax(0,1.25fr) minmax(330px,.75fr)}.problemSide{position:sticky;top:12px;align-self:start}.memoArea{grid-column:1/-1}.feedbackArea{grid-column:1/-1}}
+@media(max-width:650px){.box{margin:9px;padding:15px}.grid,.resultGrid{grid-template-columns:1fr}.pad{grid-template-columns:repeat(3,1fr)}header{padding:14px}.qmath{font-size:1.5rem}}
+/* 数式安定表示: 数式の高さを実寸で確保し、ボタンとの重なりを防ぐ */
+.math{font-style:normal;line-height:1.55;overflow:visible}
+.qmath{display:block;min-height:5.2em;padding:1.1em .35em 1.35em;margin:8px 0 4px;overflow:visible}
+#rq,#ra{display:block;min-height:3.8em;padding-top:.8em;padding-bottom:1.1em;overflow:visible}
+#ra.hide{display:none!important}
+.answer{overflow:visible}
+.feedbackArea{overflow:visible;padding-bottom:18px}
+.explanation{display:block;min-height:4.6em;padding:16px 4px 20px;margin-top:14px;overflow:visible;line-height:2}
+.feedbackActions{display:block;clear:both;position:static;margin-top:20px;padding-top:4px}#nextQ{display:block;position:static;clear:both;margin:0!important}
+.problemSide{overflow:visible}.problemSide #mt{display:block;position:static;margin-top:18px!important}
+.field{overflow-x:auto;overflow-y:visible;min-height:92px;padding-top:18px;padding-bottom:18px}
+@media(max-width:650px){.qmath{min-height:4.8em;padding:1em .2em 1.3em}.explanation{padding-bottom:24px}.field{min-height:88px}}
+
+/* 501版の配色を復元。数式の安定表示レイアウトは維持する */
+body{background:#f3f6fb;color:#152039;line-height:1.6}
+header{background:#12316b;color:#fff;border-bottom-color:#91c5ff}
+header p{color:#dceaff}
+.box{background:#fff;border-color:#d4dce8;box-shadow:0 2px 8px #1020400d}
+h2{border-left-color:#0764e8}
+.bar{background:#e1e6ee}.bar div{background:#0764e8}
+.btn.pri{background:#0764e8;color:#fff}.btn.sec{background:#e8edf4;color:#152039}
+.answer{background:#ecfbf3;border-left-color:#087443;color:#152039}
+.yellow{background:#fff7cc;border-color:#ecd467;color:#152039}
+.field{background:#f8fbff;border-color:#89aee8;color:#152039}
+.key{background:#fff;border:1px solid #cadaed;color:#152039}
+.ok{background:#ecfdf3;color:#075c37;border-left-color:#087443}
+.ng{background:#fff0ef;color:#8b2019;border-left-color:#a32920}
+.feedbackArea.feed{border-radius:10px}
+.explanation{border-top-color:#c9dfd2;color:inherit;background:transparent}
+.point{background:transparent;color:#152039}
+.resultGrid>div{background:#fff;border:1px solid #d4dce8;color:#152039}
+.score{color:#12316b}
+.memoTools button{background:#fff;border-color:#bbc8d9;color:#152039}
+canvas{background:#fff;border-color:#ccd7e5}
+
+/* グラフ（格子点タップ）と大小（順にタップ） */
+#graphBox svg{display:block;width:100%;max-width:440px;margin:10px auto 4px;background:#fff;border:2px solid #89aee8;border-radius:12px;touch-action:manipulation;cursor:crosshair;-webkit-tap-highlight-color:transparent}
+#gmsg{min-height:1.4em;margin:2px 0 0;color:#a32920;font-weight:700;text-align:center}
+#hint{margin:4px 0 8px}
+.key.choice{font-size:1.05rem;padding:10px 2px;overflow:hidden}.key.used{opacity:.3}
+
+/* 501版の結果画面構造を復元 */
+#result>.result{border:2px solid #0764e8;border-radius:14px;padding:13px;background:#fff}
+#result>.result h2{text-align:center;border:0;margin-top:0}
+#result .score{text-align:center;font-size:2.4rem;font-weight:900;color:#12316b;margin:8px 0 14px}
+#result .resultGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#result .resultGrid>div{background:#fff;border:0;border-radius:0;padding:8px}
+#result #msg{margin-top:12px}
+#result details{margin:14px 0}
+#result summary{display:inline-block;cursor:pointer;background:#e8edf4;border-radius:10px;padding:11px 17px;font-weight:800;list-style:none}
+#result summary::-webkit-details-marker{display:none}
+#result #hist{margin-top:10px}
+#result #retry{margin-top:6px}
+/* スマホ縦画面で結果画面を1画面に収める */#result .result{padding:8px}#result .result h2{font-size:clamp(1rem,3.4vw,1.32rem);margin:0 0 4px}#result .score{font-size:clamp(1.5rem,7vw,2.1rem);line-height:1.1;margin:0}#result #rg{grid-template-columns:1fr 1fr;gap:5px;margin-top:7px}#result #rg>div{padding:5px 7px;border:1px solid #dbeafe;border-radius:8px;background:#f8fbff;font-size:clamp(.8rem,2.7vw,.96rem);font-weight:900;line-height:1.2;overflow-wrap:anywhere}#result #rg b{color:#475569;font-size:clamp(.66rem,2.3vw,.78rem);font-weight:700}#result #msg{margin-top:8px;padding:8px;font-weight:900;text-align:center}#result .result>p{margin:5px 0 0;font-size:.9rem;color:#64748b}@media(max-width:650px){#result.box{margin:8px;padding:7px}}</style></head><body>
+<header><div><h1>数学II　対数関数とそのグラフ（1）</h1><p>Active Recall + 確認小テスト</p></div></header><main>
+<section id="intro" class="box"><h2>開始前の入力</h2><div class="grid"><div><label for="name">氏名</label><input id="name" placeholder="例：千葉 太郎" autocomplete="name"></div><div><label for="cls">クラス</label><select id="cls"><option value="">選択してください</option><option>MA</option><option>MB</option><option>I</option><option>E</option><option>C</option></select></div><div><label for="no">番号</label><input id="no" inputmode="numeric" placeholder="例：12"></div></div><button id="start" class="btn pri">開始する</button></section>
+<section id="recall" class="box hide"><div class="top"><span id="rcount"></span><span>対数関数とそのグラフ（1）</span></div><div class="bar"><div id="rbar"></div></div><h2>Active Recall</h2><p>問いを見て、頭の中で答えてから「答えを見る」を押してください。</p><div id="rq" class="math"></div><div id="ra" class="answer math hide"></div><div class="row"><button id="showA" class="btn pri">答えを見る</button><button id="nextR" class="btn sec">次へ</button></div></section>
+<section id="ready" class="box hide"><h2>確認小テスト開始</h2><p>4個の問題を1画面ずつ出題します。第1問・第2問は各2点、第3問・第4問は各3点、合計10点です。</p><p>得点率80％以上をS評価とし、この単元の授業プリント提出免除の対象とします。</p><p><b>第1問・第2問（グラフ）</b>：グラフが通る点のうち、<span data-tex="x"></span> 座標・<span data-tex="y"></span> 座標がともに整数の点を2つタップしてください。2点を通る曲線が表示されます。やり直すときは「点を打ち直す」を押します（3つ目の点を打っても、その点から打ち直しになります）。</p><p><b>第3問・第4問（大小）</b>：3つの数を小さい順にタップしてください。<span data-tex="\square<\square<\square"></span> に順に入ります。</p><button id="beginQuiz" class="btn pri">小テストを始める</button></section>
+<section id="quiz" class="box hide"><div class="top"><span id="qcount"></span><span id="scoreNow"></span></div><div class="bar"><div id="qbar"></div></div><div class="work"><div class="problemSide"><p id="lead" class="quizLead"></p><div id="qtext" class="math qmath"></div><span id="pts" class="point"></span><button id="mt" class="btn sec" style="margin-top:16px">✏️ メモを開く</button></div><div class="inputSide"><label>答え</label><p id="hint" class="small"></p><div id="field" class="field" aria-live="polite"></div><div id="graphBox" class="hide"></div><p id="gmsg" class="small hide"></p><div id="pad" class="pad" style="margin-top:12px"></div><button id="check" class="btn pri" style="width:100%;margin-top:12px">答えを確認</button></div><div id="memoWrap" class="memoArea hide"><div class="memoTools"><button data-c="#172033" data-w="3">黒</button><button data-c="#d22f2f" data-w="3">赤</button><button data-c="#2468d2" data-w="3">青</button><button data-c="#fff" data-w="18">消しゴム</button><button id="undo">1つ戻す</button><button id="mclear">全消去</button></div><canvas id="memo"></canvas></div><div id="feedback" class="feedbackArea hide"></div></div></section>
+<section id="result" class="box hide"><div class="result"><h2 style="text-align:center;border:0">数学II　対数関数とそのグラフ（1）　結果</h2><div id="big" class="score"></div><div id="rg" class="resultGrid"></div><div id="msg" class="yellow"></div><p style="text-align:center">この画面をスクリーンショットして提出してください。</p></div><details id="historyDetails"><summary>解答履歴を開く</summary><div id="hist"></div></details><button id="retry" class="btn pri">もう一度挑戦する</button></section>
+</main>
+<script>
+const $=s=>document.querySelector(s), screens=['intro','recall','ready','quiz','result'];
+function show(id){screens.forEach(x=>$('#'+x).classList.toggle('hide',x!==id));scrollTo(0,0)}
+function M(t){return katex.renderToString('\\displaystyle '+t,{throwOnError:false})}
+function tx(s){return s.replace(/\$([^$]+)\$/g,(_,t)=>M(t))}
+function F(n,d){return `\\frac{${n}}{${d}}`}
+function P(x){return `\\left(${x}\\right)`}
+// 底は {k, inv}。inv が真なら 1/k
+function bv(b){return b.inv?1/b.k:b.k}
+function bs(b){return b.inv?F(1,b.k):String(b.k)}
+const AR=[
+['$a$ を 1 でない正の定数とするとき、$y=\\log_ax$ のような $x$ の関数を何といいますか。また、定義域は何ですか。','$a$ を底とする<b>対数関数</b>といいます。真数は正なので、定義域は $x>0$ です。'],
+['対数関数 $y=\\log_ax$ のグラフが必ず通る2点はどこですか。','$\\log_a1=0$、$\\log_aa=1$ なので、点 $(1,\\ 0)$ と点 $(a,\\ 1)$ を通ります。'],
+['対数関数 $y=\\log_ax$ のグラフの漸近線は何ですか。','$y$ 軸です。'],
+['$y=\\log_ax$ のグラフと $y=a^x$ のグラフは、どのような位置関係にありますか。','直線 $y=x$ に関して対称です。'],
+['$y=\\log_{\\frac{1}{2}}x$ のグラフと $y=\\log_2x$ のグラフは、どのような位置関係にありますか。','$\\log_{\\frac{1}{2}}x='+F('\\log_2x','\\log_2\\frac{1}{2}')+'=-\\log_2x$ なので、$x$ 軸に関して対称です。'],
+['対数関数 $y=\\log_ax$ の値域と、グラフの増減はどうなりますか。','値域は実数全体です。$a>1$ のとき右上がり、$0<a<1$ のとき右下がりの曲線です。'],
+['正の数 $p,\\ q$ について $p<q$ のとき、$\\log_ap$ と $\\log_aq$ の大小はどうなりますか。','$a>1$ のとき $\\log_ap<\\log_aq$、$0<a<1$ のとき $\\log_ap>\\log_aq$ です（不等号の向きが変わります）。'],
+['$2\\log_{\\frac{1}{2}}3$ と $3\\log_{\\frac{1}{2}}2$ の大小は、どのように比べますか。','$k\\log_aM=\\log_aM^k$ を使って $\\log_{\\frac{1}{2}}9$、$\\log_{\\frac{1}{2}}8$ と真数の形にそろえてから比べます。底 $\\frac{1}{2}$ は 1 より小さいので、$3\\log_{\\frac{1}{2}}2>2\\log_{\\frac{1}{2}}3$ です。']
+];
+const L1='〔1〕次の関数のグラフをかけ。',L2='〔2〕次の数の大小を、不等号 $<$ を使って表せ。';
+// g: グラフ（格子点を2つタップ）
+const g=b=>{const s=b.inv?-1:1,B=bs(b);return{t:'g',lead:L1,html:`y=\\log_{${B}}x`,b,pt:2,ex:`$x=1$ のとき $y=\\log_{${B}}1=0$、$x=${b.k}$ のとき $y=\\log_{${B}}${b.k}=${s}$ なので、点 $(1,\\ 0)$ と点 $(${b.k},\\ ${s})$ を通ります。<br>底 $${B}$ は${b.inv?' 1 より小さい正の数なので、右下がり':' 1 より大きいので、右上がり'}の曲線になり、$y$ 軸が漸近線です。<br>`+(b.inv?`$y=\\log_{${b.k}}x$ のグラフと $x$ 軸に関して対称です。`:`$y=${b.k}^x$ のグラフと直線 $y=x$ に関して対称です。`)}};
+// o1: log_b M の大小（底は 1 より大きい）
+const o1=(b,ms)=>{const items=ms.map(m=>({t:`\\log_{${b}}${m}`,v:Math.log(m)/Math.log(b)})),asc=[...items].sort((p,q)=>p.v-q.v),mAsc=[...ms].sort((p,q)=>p-q);return{t:'o',lead:L2,inv:false,items,ans:asc.map(i=>i.t),pt:3,ex:`底 $${b}$ は 1 より大きく、$${mAsc.join('<')}$ であるから<br>$${asc.map(i=>i.t).join('<')}$`}};
+// o2: k log_{1/b} m の大小（真数の形 log_{1/b} m^k に直して比べる）
+const o2=(b,ps)=>{const B=F(1,b),items=ps.map(([k,m])=>({t:`${k}\\log_{${B}}${m}`,M:Math.pow(m,k),k,m,v:-k*Math.log(m)/Math.log(b)})),asc=[...items].sort((p,q)=>p.v-q.v);return{t:'o',lead:L2,inv:true,items,ans:asc.map(i=>i.t),pt:3,ex:`$${items.map(i=>`${i.t}=\\log_{${B}}${i.m}^{${i.k}}=\\log_{${B}}${i.M}`).join('$<br>$')}$<br>底 $${B}$ は 1 より小さい正の数で、$${[...asc].reverse().map(i=>i.M).join('<')}$ であるから<br>$${asc.map(i=>`\\log_{${B}}${i.M}`).join('<')}$<br>したがって $${asc.map(i=>i.t).join('<')}$`}};
+const S=[
+{id:'A',q:[g({k:4}),g({k:4,inv:1}),o1(3,[7,5,6]),o2(2,[[2,3],[3,2],[10,1]])]},
+{id:'B',q:[g({k:2}),g({k:2,inv:1}),o1(2,[6,3,5]),o2(3,[[2,5],[3,3],[5,1]])]},
+{id:'C',q:[g({k:3}),g({k:3,inv:1}),o1(3,[10,4,8]),o2(2,[[3,3],[2,5],[4,2]])]},
+{id:'D',q:[g({k:5}),g({k:5,inv:1}),o1(2,[11,9,7]),o2(3,[[2,6],[3,2],[5,2]])]}
+];
+const NQ=4;
+let ri=0,si=0,qi=0,score=0,attempt=1,h=[],ans={},disp=[],qtex='',locked=false,gok=false,deck=[],lastSet='';
+function cur(){return S[si].q[qi]}
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function chooseSet(){if(!deck.length){deck=shuffle([0,1,2,3]);if(deck[0]===lastSet)[deck[0],deck[1]]=[deck[1],deck[0]]}si=deck.shift();lastSet=si}
+function renderRecall(){$('#rcount').textContent=`${ri+1} / ${AR.length}`;$('#rbar').style.width=`${(ri+1)/AR.length*100}%`;$('#rq').innerHTML=tx(AR[ri][0]);$('#ra').innerHTML=tx(AR[ri][1]);$('#ra').classList.add('hide');$('#showA').classList.remove('hide');$('#nextR').textContent=ri===AR.length-1?'小テストへ進む':'次へ'}
+$('#start').onclick=()=>{if(!$('#name').value.trim()||!$('#cls').value||!$('#no').value.trim())return alert('氏名、クラス、番号を入力してください。');ri=0;show('recall');renderRecall()};
+$('#showA').onclick=()=>{$('#ra').classList.remove('hide');$('#showA').classList.add('hide')};$('#nextR').onclick=()=>{if(ri<AR.length-1){ri++;renderRecall()}else show('ready')};
+document.querySelectorAll('[data-tex]').forEach(el=>el.innerHTML=M(el.dataset.tex));
+$('#beginQuiz').onclick=startQuiz;function startQuiz(){chooseSet();qi=0;score=0;h=[];show('quiz');renderQ()}
+const SQ='{\\color{#0764e8}\\square}';
+
+// ---- グラフ（方眼：-1≦x≦8、-3≦y≦3）----
+const U=34,XN=-1.6,XX=8.6,YN=-3.6,YX=3.6,VW=+((XX-XN)*U).toFixed(1),VH=+((YX-YN)*U).toFixed(1);
+const gx=x=>((x-XN)*U).toFixed(1),gy=y=>((YX-y)*U).toFixed(1);
+// 2点を通る y = c·log x + d（対数関数の形）
+function fitCurve(p,q){const c=(q.y-p.y)/(Math.log(q.x)-Math.log(p.x));return{c,d:p.y-c*Math.log(p.x)}}
+function curvePath(c,d){let s='';for(let i=0;i<=400;i++){const x=1e-4+XX*Math.pow(i/400,3),y=Math.max(YN-1,Math.min(YX+1,c*Math.log(x)+d));s+=(i?'L':'M')+gx(x)+' '+gy(y)}return s}
+function drawGraph(){const x=cur();let s=`<svg id="gsvg" viewBox="0 0 ${VW} ${VH}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="座標平面"><defs><clipPath id="gclip"><rect x="0" y="0" width="${VW}" height="${VH}"/></clipPath></defs><g stroke="#e1e8f2" stroke-width="1">`;
+for(let i=-1;i<=8;i++)s+=`<line x1="${gx(i)}" y1="0" x2="${gx(i)}" y2="${VH}"/>`;
+for(let j=-3;j<=3;j++)s+=`<line x1="0" y1="${gy(j)}" x2="${VW}" y2="${gy(j)}"/>`;
+s+=`</g><g stroke="#152039" stroke-width="1.4"><line x1="0" y1="${gy(0)}" x2="${VW-2}" y2="${gy(0)}"/><line x1="${gx(0)}" y1="${VH}" x2="${gx(0)}" y2="2"/></g><path d="M${VW-2} ${gy(0)} l-7 -3.5 v7z M${gx(0)} 2 l-3.5 7 h7z" fill="#152039"/><g font-family="Times New Roman,serif" font-size="11" fill="#334766">`;
+for(let i=-1;i<=8;i++)if(i)s+=`<text x="${gx(i)}" y="${+gy(0)+13}" text-anchor="middle">${i<0?'−'+(-i):i}</text>`;
+for(let j=-3;j<=3;j++)if(j)s+=`<text x="${+gx(0)-5}" y="${+gy(j)+4}" text-anchor="end">${j<0?'−'+(-j):j}</text>`;
+s+=`<text x="${+gx(0)-5}" y="${+gy(0)+13}" text-anchor="end">O</text><text x="${VW-10}" y="${+gy(0)-6}" font-style="italic" font-size="14">x</text><text x="${+gx(0)+7}" y="14" font-style="italic" font-size="14">y</text></g><g clip-path="url(#gclip)" fill="none" stroke-linecap="round">`;
+if(locked&&!gok)s+=`<path d="${curvePath(1/Math.log(bv(x.b)),0)}" stroke="#087443" stroke-width="3" stroke-dasharray="7 5"/>`;
+if(ans.pts.length===2){const f=fitCurve(ans.pts[0],ans.pts[1]);s+=`<path d="${curvePath(f.c,f.d)}" stroke="${locked&&!gok?'#a32920':'#0764e8'}" stroke-width="2.6"/>`}
+s+='</g>';
+for(const p of ans.pts){const left=p.x>=6,ty=p.y>=3?+gy(p.y)+16:+gy(p.y)-7;s+=`<circle cx="${gx(p.x)}" cy="${gy(p.y)}" r="5.5" fill="#0764e8" stroke="#fff" stroke-width="1.5"/><text x="${+gx(p.x)+(left?-6:6)}" y="${ty}" text-anchor="${left?'end':'start'}" font-size="11" font-weight="700" fill="#0b3d91">(${p.x}, ${p.y})</text>`}
+$('#graphBox').innerHTML=s+'</svg>'}
+function gMsg(t){$('#gmsg').textContent=t}
+$('#graphBox').onclick=ev_=>{if(locked||cur().t!=='g')return;const sv=$('#gsvg'),r=sv.getBoundingClientRect();const x=Math.round(XN+(ev_.clientX-r.left)/r.width*VW/U),y=Math.round(YX-(ev_.clientY-r.top)/r.height*VH/U);if(x<-1||x>8||y<-3||y>3)return;gMsg('');const pts=ans.pts,same=pts.findIndex(p=>p.x===x&&p.y===y);
+if(same>=0){pts.splice(same,1)}
+else if(x<=0){gMsg('真数は正なので、x>0 の点を選びましょう。')}
+else if(pts.length===2){ans.pts=[{x,y}];gMsg('打ち直しています。もう1点タップしてください。')}
+else if(pts.length===1&&pts[0].x===x){gMsg('x 座標が同じ2点は選べません。')}
+else if(pts.length===1&&pts[0].y===y){gMsg('y 座標が同じ2点を通る対数関数のグラフはありません。')}
+else pts.push({x,y});
+drawGraph();renderInput()};
+
+// ---- 入力欄 ----
+function renderInput(){const x=cur();let t;if(x.t==='g')t=ans.pts.length?'<span class="small">打った点：</span>'+M(ans.pts.map(p=>`(${p.x},\\ ${p.y})`).join(',\\ ')):'<span class="small">グラフが通る点を2つタップしてください</span>';else t=M([0,1,2].map(i=>ans.order[i]!==undefined?disp[ans.order[i]].t:SQ).join('<'));$('#field').innerHTML=t;if(x.t==='o')document.querySelectorAll('#pad [data-k^="c"]').forEach(b=>b.classList.toggle('used',ans.order.includes(+b.dataset.k.slice(1))))}
+function buildPad(){const x=cur();if(x.t==='g')$('#pad').innerHTML='<button class="key" data-k="reset" style="grid-column:1/-1">点を打ち直す</button>';else $('#pad').innerHTML=disp.map((it,i)=>`<button class="key choice" data-k="c${i}">${M(it.t)}</button>`).join('')+'<button class="key" data-k="back">1つ戻す</button><button class="key" data-k="clear">全消去</button>';$('#pad').classList.remove('hide')}
+// 大小の問題文は、数ごとに折り返せるように1つずつ表示する
+function qHTML(){return cur().t==='o'?disp.map((i,n)=>`<span style="display:inline-block;margin-right:.7em">${M(i.t+(n<2?',':''))}</span>`).join(''):M(qtex)}
+const HINT={g:'グラフが通る点のうち、x 座標・y 座標がともに整数の点を2つタップしてください。',o:'3つの数を小さい順にタップしてください。'};
+function renderQ(){const x=cur();$('#qcount').textContent=`第${qi+1}問 / ${NQ}`;$('#scoreNow').textContent=`現在 ${score}点`;$('#qbar').style.width=`${qi/NQ*100}%`;$('#lead').innerHTML=tx(x.lead);
+locked=false;gok=false;ans=x.t==='g'?{pts:[]}:{order:[]};
+if(x.t==='o'){do{disp=shuffle(x.items)}while(disp.map(i=>i.t).join()===x.ans.join())}
+qtex=x.t==='o'?disp.map(i=>i.t).join(',\\quad '):x.html;$('#qtext').innerHTML=qHTML();$('#pts').textContent=`${x.pt}点`;$('#hint').textContent=HINT[x.t];
+$('#graphBox').classList.toggle('hide',x.t!=='g');$('#gmsg').classList.toggle('hide',x.t!=='g');gMsg('');if(x.t==='g')drawGraph();
+$('#field').className='field';$('#feedback').classList.add('hide');$('#feedback').innerHTML='';$('#check').classList.remove('hide');buildPad();renderInput();resetMemo();scrollTo({top:0,behavior:'smooth'})}
+$('#pad').onclick=ev_=>{const btn=ev_.target.closest('[data-k]');if(!btn||locked)return;const k=btn.dataset.k,x=cur();
+if(x.t==='g'){if(k==='reset'){ans.pts=[];gMsg('');drawGraph()}}
+else{if(k[0]==='c'&&k!=='clear'){const i=+k.slice(1);if(!ans.order.includes(i)&&ans.order.length<3)ans.order.push(i)}else if(k==='back')ans.order.pop();else if(k==='clear')ans.order=[]}
+renderInput()};
+function uHTML(x,u){if(x.t==='g')return M(u.pts.map(p=>`(${p.x},\\ ${p.y})`).join(',\\ '))+' を通るグラフ';return M(u.order.join('<'))}
+function rHTML(x){if(x.t==='g'){const s=x.b.inv?-1:1;return M(x.html)+' のグラフ（例：'+M(`(1,\\ 0),\\ (${x.b.k},\\ ${s})`)+' を通る）'}return M(x.ans.join('<'))}
+$('#check').onclick=()=>{const x=cur();let ok=false,reason='',u;
+if(x.t==='g'){if(ans.pts.length<2)return alert('点を2つ打ってください。');u={pts:ans.pts.map(p=>({...p}))};const v=bv(x.b),on=(p,w)=>p.x>0&&Math.abs(Math.log(p.x)/Math.log(w)-p.y)<1e-9;ok=u.pts.every(p=>on(p,v));
+if(!ok){const B=bs(x.b),s=x.b.inv?-1:1;if(u.pts.every(p=>on(p,1/v)))reason=`打った2点は $y=\\log_{${bs({k:x.b.k,inv:!x.b.inv})}}x$ のグラフ上の点で、正しいグラフと $x$ 軸に関して対称になっています。底が 1 より大きいか小さいかを確かめましょう。`;else if(u.pts.every(p=>Math.abs(Math.pow(v,p.x)-p.y)<1e-9))reason=`打った2点は $y=${x.b.inv?P(B):B}^x$ のグラフ上の点です。対数関数のグラフは、指数関数のグラフと直線 $y=x$ に関して対称です。$x$ 座標と $y$ 座標を入れ替えてみましょう。`;else if(!u.pts.some(p=>p.x===1&&p.y===0))reason=`$x=1$ のとき $y=\\log_{${B}}1=0$ です。まず点 $(1,\\ 0)$ をとりましょう。`;else reason=`点 $(1,\\ 0)$ は正しいです。もう1点は、$x=${x.b.k}$ のときの $y=\\log_{${B}}${x.b.k}$ の値を考えましょう（答えは $${s}$ です）。`}
+gok=ok}
+else{if(ans.order.length<3)return alert('3つとも小さい順にタップしてください。');u={order:ans.order.map(i=>disp[i].t)};ok=u.order.join()===x.ans.join();
+if(!ok&&[...u.order].reverse().join()===x.ans.join())reason=x.inv?'真数の小さい順に並べています。底が 1 より小さいときは、真数が大きいほど値は小さくなります。':'大きい順に並んでいます。小さい順に並べましょう。'}
+locked=true;score+=ok?x.pt:0;h.push({q:qtex,x,u,ok});
+if(x.t==='g')drawGraph();$('#field').classList.add('readonly');$('#pad').classList.add('hide');$('#check').classList.add('hide');gMsg('');
+$('#feedback').className='feedbackArea feed '+(ok?'ok':'ng');$('#feedback').innerHTML=`<h3>${ok?'✅ 正解です':'❌ 不正解です'}</h3><p><b>あなたの答え：</b> ${uHTML(x,u)}</p>${ok?'':`<p><b>正しい答え：</b> ${rHTML(x)}</p>`}${x.t==='g'&&!ok?'<p>緑の点線が正しいグラフです。</p>':''}${reason?`<p>${tx(reason)}</p>`:''}<div class="explanation"><b>解説</b><br>${tx(x.ex)}</div><div class="feedbackActions"><button id="nextQ" class="btn pri">${qi===NQ-1?'結果を見る':'次の問題へ'}</button></div>`;$('#nextQ').onclick=()=>{if(qi===NQ-1)results();else{qi++;renderQ()}}};
+function results(){show('result');requestAnimationFrame(()=>scrollTo({top:$('#result').offsetTop-10,behavior:'smooth'}));let rate=Math.round(score/10*100),gr=rate>=80?'S':rate>=60?'A':rate>=30?'B':'C',id=`M2-507-LOGGRAPH1-${S[si].id}`,dt=new Date().toLocaleString('ja-JP'),code=`E507-${(score+1)*137+attempt*29+si*17}`;$('#big').textContent=`${score} / 10点`;$('#rg').innerHTML=`<div><b>氏名</b><br>${esc($('#name').value)}</div><div><b>クラス・番号</b><br>${esc($('#cls').value)}・${esc($('#no').value)}番</div><div><b>正答率</b><br>${rate}%</div><div><b>評価</b><br>${gr}</div><div><b>挑戦回数</b><br>${attempt}回</div><div><b>完了日時</b><br>${dt}</div><div><b>セットID</b><br>${id}</div><div><b>確認コード</b><br>${code}</div>`;$('#msg').textContent=gr==='S'?'S評価です。この単元の授業プリントは提出免除の対象です。':'S評価は得点率80％以上です。もう一度挑戦できます。';$('#hist').innerHTML=h.map((r,i)=>`<div class="historyItem"><b>第${i+1}問 ${r.ok?'○':'×'}（${r.x.pt}点）</b><br><span class="math">${M(r.q)}</span><br>あなたの答え：${uHTML(r.x,r.u)}<br>正しい答え：${rHTML(r.x)}</div>`).join('');$('#historyDetails').open=false}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}$('#retry').onclick=()=>{attempt++;show('ready')};
+const cv=$('#memo'),cx=cv.getContext('2d',{alpha:false});let strokes=[],drawing=false,pointerId=null,last=null,st=null,col='#172033',wid=3,pending=[],rafId=0,resizeTimer;
+function memoOpen(){return !$('#memoWrap').classList.contains('hide')}function scaleCanvas(){const r=cv.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2),old=strokes;cv.width=Math.max(1,Math.round(r.width*d));cv.height=Math.max(1,Math.round(r.height*d));cx.setTransform(d,0,0,d,0,0);cx.fillStyle='#fff';cx.fillRect(0,0,r.width,r.height);strokes=old;redrawAll()}function point(e){const r=cv.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}function validPoint(p){return Number.isFinite(p.x)&&Number.isFinite(p.y)&&p.x>=0&&p.y>=0&&p.x<=cv.clientWidth&&p.y<=cv.clientHeight}function segment(a,b,c,w){cx.strokeStyle=c;cx.lineWidth=w;cx.lineCap='round';cx.lineJoin='round';cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke()}function flush(){rafId=0;for(const q of pending)segment(q.a,q.b,q.c,q.w);pending=[]}function queueSegment(a,b,c,w){pending.push({a,b,c,w});if(!rafId)rafId=requestAnimationFrame(flush)}function redrawAll(){if(!memoOpen())return;cx.fillStyle='#fff';cx.fillRect(0,0,cv.clientWidth,cv.clientHeight);for(const s of strokes)for(let i=1;i<s.p.length;i++)segment(s.p[i-1],s.p[i],s.c,s.w)}
+cv.addEventListener('pointerdown',e=>{if(!memoOpen())return;e.preventDefault();drawing=true;pointerId=e.pointerId;cv.setPointerCapture(pointerId);const p=point(e);if(!validPoint(p)){drawing=false;return}st={c:col,w:wid,p:[p]};strokes.push(st);last=p},{passive:false});cv.addEventListener('pointermove',e=>{if(!drawing||e.pointerId!==pointerId||!memoOpen())return;e.preventDefault();const evs=e.getCoalescedEvents?e.getCoalescedEvents():[e];for(const ev of evs){const p=point(ev);if(!validPoint(p))continue;const dist=last?Math.hypot(p.x-last.x,p.y-last.y):0;if(!last||dist>80)continue;st.p.push(p);queueSegment(last,p,st.c,st.w);last=p}},{passive:false});function finish(e){if(e.pointerId!==pointerId)return;e.preventDefault();drawing=false;pointerId=null;last=null;flush()}cv.addEventListener('pointerup',finish,{passive:false});cv.addEventListener('pointercancel',e=>{if(e.pointerId!==pointerId)return;drawing=false;pointerId=null;last=null;pending=[];if(rafId){cancelAnimationFrame(rafId);rafId=0}},{passive:false});function resetMemo(){strokes=[];pending=[];drawing=false;last=null;if(rafId){cancelAnimationFrame(rafId);rafId=0}if(memoOpen())requestAnimationFrame(scaleCanvas)}$('#mt').onclick=()=>{const open=$('#memoWrap').classList.contains('hide');$('#memoWrap').classList.toggle('hide',!open);$('#mt').textContent=open?'✏️ メモを閉じる':'✏️ メモを開く';if(open)requestAnimationFrame(scaleCanvas)};document.querySelector('.memoTools').onclick=e=>{if(e.target.dataset.c){col=e.target.dataset.c;wid=+e.target.dataset.w}};$('#undo').onclick=()=>{strokes.pop();redrawAll()};$('#mclear').onclick=()=>{strokes=[];redrawAll()};addEventListener('resize',()=>{if(!memoOpen())return;clearTimeout(resizeTimer);resizeTimer=setTimeout(scaleCanvas,120)},{passive:true});
+console.assert(S.length===4&&S.every(x=>x.q.length===NQ));console.assert(S.every(x=>x.q.reduce((a,b)=>a+b.pt,0)===10));
+</script></body></html>
