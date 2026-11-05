@@ -91,9 +91,9 @@ function valTeX(t,arr){return tmpl(t,arr.map((r,i)=>{const s=rT(r);return t==='X
 const AR=[
 ['10 を底とする対数 $\\log_{10}M$ を何といいますか。','<b>常用対数</b>といいます。'],
 ['$\\log_{10}10^n$ の値はいくつですか。','$n$ です。'],
-['$1320$ を $a\\times10^n$（$1\\le a<10$、$n$ は整数）の形で表しなさい。','$1320=1.32\\times10^3$'],
+['$1320$ を $a\\times10^n$（$1\\leqq a<10$、$n$ は整数）の形で表しなさい。','$1320=1.32\\times10^3$'],
 ['$\\log_{10}1320$ を、$\\log_{10}1.32$ を使って表しなさい。','$\\log_{10}1320=\\log_{10}(1.32\\times10^3)=\\log_{10}1.32+\\log_{10}10^3=\\log_{10}1.32+3$'],
-['$0.132$ を $a\\times10^n$（$1\\le a<10$、$n$ は整数）の形で表しなさい。','$0.132='+F('1.32','10')+'=1.32\\times10^{-1}$'],
+['$0.132$ を $a\\times10^n$（$1\\leqq a<10$、$n$ は整数）の形で表しなさい。','$0.132='+F('1.32','10')+'=1.32\\times10^{-1}$'],
 ['$\\log_{10}1.32=0.1206$ のとき、$\\log_{10}0.132$ の値を求めなさい。','$\\log_{10}0.132=\\log_{10}1.32+\\log_{10}10^{-1}=0.1206-1=-0.8794$']
 ];
 function T10(e){return e===1?'10':`10^{${e}}`}
@@ -145,7 +145,7 @@ $('#check').onclick=()=>{const x=cur(),A=x.a,us=ans.f.map(readF);if(us.some(u=>!
 let ok=us.every((u,i)=>eqv(u,A[i])),reason='';
 if(!ok){const v=us[0].n/us[0].d,m=+x.m,e=x.e;if(e<0&&Math.abs(v-(e-m))<1e-9)reason=`$\\log_{10}10^{${e}}=${e}$ なので、$${x.m}+(${e})=${x.m}${e}$ を計算します。`;
 else if(Math.abs(v-m)<1e-9)reason=`$\\log_{10}${T10(e)}=${e}$ の分を加えましょう。`;
-else reason='真数を $a\\times10^n$（$1\\le a<10$）の形に直すと、$\\log_{10}a+n$ になります。$n$ が正しいか確かめましょう。'}
+else reason='真数を $a\\times10^n$（$1\\leqq a<10$）の形に直すと、$\\log_{10}a+n$ になります。$n$ が正しいか確かめましょう。'}
 locked=true;score+=ok?x.pt:0;h.push({x,us,ok});renderInput();
 $('#field').classList.add('readonly');$('#pad').classList.add('hide');$('#slots').classList.add('hide');$('#togglePad').classList.add('hide');$('#check').classList.add('hide');
 $('#feedback').className='feedbackArea feed '+(ok?'ok':'ng');$('#feedback').innerHTML=`<h3>${ok?'✅ 正解です':'❌ 不正解です'}</h3><p><b>あなたの答え：</b> ${M(x.pre+uTeX(x.t,us))}</p>${ok?'':`<p><b>正しい答え：</b> ${M(x.pre+valTeX(x.t,A))}</p>`}${reason?`<p>${tx(reason)}</p>`:''}<div class="explanation"><b>解説</b><br>${tx(x.ex)}</div><div class="feedbackActions"><button id="nextQ" class="btn pri">${qi===NQ-1?'結果を見る':'次の問題へ'}</button></div>`;$('#nextQ').onclick=()=>{if(qi===NQ-1)results();else{qi++;renderQ()}}};
